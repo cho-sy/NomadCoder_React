@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+  
+    
+    
+    function MinutesToHours () {
+      const [amount, setAmount] = React.useState();
+      const onChange= (event)=>{
+        setAmount(event.target.value);
+      }
+      const reset=()=>setAmount(0);
+
+      const [flipped, setFipped] = React.useState(false);
+      const onFlip = () => {
+        reset(); // flip 할 때마다 값이 그대로 남아있으므로 reset 추가해줌 
+        setFipped(cur => !cur)
+      };
+
+      return(
+        <div>
+          <div>
+            <label htmlFor="minutes">Minuets </label>
+            <input 
+              value={flipped? amount*60: amount}
+              id="minutes" 
+              placeholder="Minuets" 
+              type="number"
+              onChange={onChange}
+              disabled={flipped}
+            /></div>
+
+            <div>
+              <label htmlFor="hours">Hours </label>
+            <input 
+              value={flipped? amount:Math.round(amount/60)} 
+              id="hours" 
+              placeholder="Hours" 
+              type="number"
+              onChange={onChange} // 추가
+              disabled={!flipped}
+            />
+            </div>
+            <button onClick={reset}>Reset</button>
+            <button onClick={onFlip}>{flipped?"Change to Min -> Hour":"Change to Hour-> Min"}</button>
+        </div>
+        
+        );
+        
+      }
+
+    function MeterToKm()
+    {
+      const [distance, setDis] = React.useState();
+      const onChange = (event) => {
+        setDis(event.target.value);
+      }
+
+      const reset2 = () => setDis("");
+
+      const [inv, setInv] = React.useState(false); 
+      const onInvert = () =>{
+        reset2();
+        setInv(cur=>!cur);
+      }
+      console.log(inv);
+
+      return(
+      <div>
+        <div>
+          <label htmlFor="meter">M </label>
+          <input 
+            value= {inv?distance*1000:distance}
+            id="meter" 
+            type="number" 
+            placeholder="Meter"
+            onChange ={onChange}
+            disabled={inv}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="km">KM </label>
+          <input 
+            value= {inv?distance:distance/1000}
+            id="km" 
+            type="number" 
+            placeholder="KM"
+            onChange ={onChange}
+            disabled={!inv}
+          />
+        </div>
+        <button onClick={reset2}>Reset</button>
+        <button onClick={onInvert}>Change to {inv?"M to Km":"Km to M"}</button>
+      </div>
+      
+      );
+    }
+      function App () {
+        const [index, setIndex] = React.useState("-1");
+        const onSelect = (event) => {
+          setIndex(event.target.value);
+        };
+        return(
+        <div>
+          <h1>Super Converter</h1>
+          <select var={index} onChange={onSelect} name="" id="">
+            <option value="-1">Select Menu</option>
+            <option value="0">Minuets / Hours</option>
+            <option value="1">M / Km</option>
+            </select>
+            <hr /> 
+
+            {index==="-1" ? "메뉴를 고르세요": null}
+            {index==="0" ? <MinutesToHours/> : null}
+            {index==="1" ?  <MeterToKm/> : null}
+        </div>
+        );
+      }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App/>, root);
+  </script>
+</html>
