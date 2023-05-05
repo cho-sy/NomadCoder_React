@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/NomadCoder_React/react-nomad/static/js/main.57babc90.js",
-    "index.html": "/NomadCoder_React/react-nomad/index.html",
-    "main.57babc90.js.map": "/NomadCoder_React/react-nomad/static/js/main.57babc90.js.map"
+    "main.js": "/NomadCoder_React/static/js/main.57babc90.js",
+    "index.html": "/NomadCoder_React/index.html",
+    "main.57babc90.js.map": "/NomadCoder_React/static/js/main.57babc90.js.map"
   },
   "entrypoints": [
     "static/js/main.57babc90.js"
